@@ -29,15 +29,18 @@ class UserController extends Controller
     	*/
 
     	$users = DB::select('SELECT myonewinner.players.username, myonewinner.users.email, myonewinner.players.real_balance, myonewinner.games.name FROM myonewinner.users INNER JOIN myonewinner.players,myonewinner.games where (myonewinner.games.id = myonewinner.players.games_register_id and myonewinner.users.id =myonewinner.players.users_id and myonewinner.players.real_balance >= ?) Order by myonewinner.players.real_balance asc',[$request->realBalance]);
-    	return view ('users.result_users_with_more_real_balance_than', ['users' => $users]);
 
+        $realBalance = $request->realBalance;
+
+    	return view ('users.result_users_with_more_real_balance_than', ['users' => $users, 'realBalance' => $realBalance]);
     }
 
     // obtiene los usuarios con saldo real inferior al valor especificado
     public function getUsersWithLessRealBalanceThan(Request $request){
 
     	$users = DB::select('SELECT myonewinner.players.username, myonewinner.users.email, myonewinner.players.real_balance, myonewinner.games.name FROM myonewinner.users INNER JOIN myonewinner.players,myonewinner.games where (myonewinner.games.id = myonewinner.players.games_register_id and myonewinner.users.id =myonewinner.players.users_id and myonewinner.players.real_balance < ?) Order by myonewinner.players.real_balance desc',[$request->realBalance]);
-    	return view ('users.result_users_with_less_real_balance_than', ['users' => $users]);
+        $realBalance = $request->realBalance;
+    	return view ('users.result_users_with_less_real_balance_than', ['users' => $users, 'realBalance' => $realBalance]);
 
     }
 
@@ -47,6 +50,7 @@ class UserController extends Controller
 myonewinner.users.last_login, myonewinner.games.name
 FROM myonewinner.users INNER JOIN myonewinner.players, myonewinner.games
 where (myonewinner.players.games_register_id = myonewinner.games.id and myonewinner.users.id = myonewinner.players.users_id and (datediff(now(),myonewinner.users.last_login) >= ?)) Order by myonewinner.users.last_login desc',[$request->days]);
+
     	$days = $request->days;
     	return view ('users.result_lost_users', ['users' => $users, 'days' => $days]);
     }

@@ -5,7 +5,7 @@
     <a href="{{ url('/') }}">Ir a página principal</a>
   @endif
 <h2>
-   @if (isset($breed)){{ $breed->name }}@endif Resultados
+   @if (isset($breed)){{ $breed->name }}@endif Usuarios con saldo inferior a {{ $realBalance }} USD
 </h2>
 
 @stop
@@ -16,6 +16,7 @@
         Username : <strong>{{ $user->username }}</strong>
         Email: <strong>{{ $user->email }}</strong>
         Saldo: <strong>{{ $user->real_balance }}</strong>
+        Juego de registro: <strong>{{ $user->name }}</strong>
       </a>
     </div>
   @endforeach
