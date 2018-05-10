@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\DB;
 class UserController extends Controller
 {
     public function getAllUsersWithRealBalance($balance){
-       $query = "SELECT myonewinner.players.username, myonewinner.users.email, myonewinner.players.real_balance FROM myonewinner.users INNER JOIN myonewinner.players where (myonewinner.users.id = myonewinner.players.users_id and myonewinner.players.real_balance< $balance) Order by myonewinner.players.real_balance desc";
+       $query = "SELECT onewinner_beta.players.username, onewinner_beta.users.email, onewinner_beta.players.real_balance FROM onewinner_beta.users INNER JOIN onewinner_beta.players where (onewinner_beta.users.id = onewinner_beta.players.users_id and onewinner_beta.players.real_balance< $balance) Order by onewinner_beta.players.real_balance desc";
 
 
 
@@ -28,7 +28,7 @@ class UserController extends Controller
 
     	*/
 
-    	$users = DB::select('SELECT myonewinner.players.username, myonewinner.users.email, myonewinner.players.real_balance, myonewinner.games.name FROM myonewinner.users INNER JOIN myonewinner.players,myonewinner.games where (myonewinner.games.id = myonewinner.players.games_register_id and myonewinner.users.id =myonewinner.players.users_id and myonewinner.players.real_balance >= ?) Order by myonewinner.players.real_balance asc',[$request->realBalance]);
+    	$users = DB::select('SELECT onewinner_beta.players.username, onewinner_beta.users.email, onewinner_beta.players.real_balance, onewinner_beta.games.name FROM onewinner_beta.users INNER JOIN onewinner_beta.players,onewinner_beta.games where (onewinner_beta.games.id = onewinner_beta.players.games_register_id and onewinner_beta.users.id =onewinner_beta.players.users_id and onewinner_beta.players.real_balance >= ?) Order by onewinner_beta.players.real_balance asc',[$request->realBalance]);
 
         $realBalance = $request->realBalance;
 
@@ -38,7 +38,7 @@ class UserController extends Controller
     // obtiene los usuarios con saldo real inferior al valor especificado
     public function getUsersWithLessRealBalanceThan(Request $request){
 
-    	$users = DB::select('SELECT myonewinner.players.username, myonewinner.users.email, myonewinner.players.real_balance, myonewinner.games.name FROM myonewinner.users INNER JOIN myonewinner.players,myonewinner.games where (myonewinner.games.id = myonewinner.players.games_register_id and myonewinner.users.id =myonewinner.players.users_id and myonewinner.players.real_balance < ?) Order by myonewinner.players.real_balance desc',[$request->realBalance]);
+    	$users = DB::select('SELECT onewinner_beta.players.username, onewinner_beta.users.email, onewinner_beta.players.real_balance, onewinner_beta.games.name FROM onewinner_beta.users INNER JOIN onewinner_beta.players,onewinner_beta.games where (onewinner_beta.games.id = onewinner_beta.players.games_register_id and onewinner_beta.users.id =onewinner_beta.players.users_id and onewinner_beta.players.real_balance < ?) Order by onewinner_beta.players.real_balance desc',[$request->realBalance]);
         $realBalance = $request->realBalance;
     	return view ('users.result_users_with_less_real_balance_than', ['users' => $users, 'realBalance' => $realBalance]);
 
@@ -46,12 +46,23 @@ class UserController extends Controller
 
     // obtiene los usuarios que no juegan desde hace días
     public function getLostUsers(Request $request){
-    	$users = DB::select('SELECT myonewinner.players.username, myonewinner.users.email, 
-myonewinner.users.last_login, myonewinner.games.name
-FROM myonewinner.users INNER JOIN myonewinner.players, myonewinner.games
-where (myonewinner.players.games_register_id = myonewinner.games.id and myonewinner.users.id = myonewinner.players.users_id and (datediff(now(),myonewinner.users.last_login) >= ?)) Order by myonewinner.users.last_login desc',[$request->days]);
+    	$users = DB::select('SELECT onewinner_beta.players.username, onewinner_beta.users.email, 
+onewinner_beta.users.last_login, onewinner_beta.games.name
+FROM onewinner_beta.users INNER JOIN onewinner_beta.players, onewinner_beta.games
+where (onewinner_beta.players.games_register_id = onewinner_beta.games.id and onewinner_beta.users.id = onewinner_beta.players.users_id and (datediff(now(),onewinner_beta.users.last_login) >= ?)) Order by onewinner_beta.users.last_login desc',[$request->days]);
 
     	$days = $request->days;
     	return view ('users.result_lost_users', ['users' => $users, 'days' => $days]);
+    }
+
+    // Función para probar paso de parámetros desde enlaces
+    public function getMessage(Request $request){
+        //TODO
+        return view('users.details_user',['username' => 'Test']);
+    }
+
+    // Obtiene el último juego jugado por un usuario
+    public function getLastGamePlayedByPlayerId($id){
+      //TODO
     }
 }

@@ -10,9 +10,12 @@
 
 @stop
 @section('content')
+  <form method="post" action="#">
+    @csrf
   @foreach ($users as $user)
     <div class="player">
-      <a href="#">
+      <a href="{{ action 
+        ('UserController@getMessage', $user->username) }}">
         Username : <strong>{{ $user->username }}</strong>
         Email: <strong>{{ $user->email }}</strong>
         Último login: <strong>{{ $user->last_login }}</strong>
@@ -20,4 +23,5 @@
       </a>
     </div>
   @endforeach
+</form>
 @stop

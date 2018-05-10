@@ -50,3 +50,7 @@ Route::get('players', function(){
 }); //ruta para obtener todos los jugadores
 
 Route::get('playersInfo', 'PlayerController@getAllPlayersInfo');
+
+// Route::post('message','UserController@getMessage');
+
+Route::post('message','UserController@getMessage');
