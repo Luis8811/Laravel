@@ -9,18 +9,10 @@ class UserController extends Controller
 {
     public function getAllUsersWithRealBalance($balance){
        $query = "SELECT onewinner_beta.players.username, onewinner_beta.users.email, onewinner_beta.players.real_balance FROM onewinner_beta.users INNER JOIN onewinner_beta.players where (onewinner_beta.users.id = onewinner_beta.players.users_id and onewinner_beta.players.real_balance< $balance) Order by onewinner_beta.players.real_balance desc";
-
-
-
-       
-
-
     }
-
 
      // obtiene los usuarios con saldo real igual o mayor al parámetro especificado
     public function getUsersWithRealBalance(Request $request){
-
 
     	/*
 

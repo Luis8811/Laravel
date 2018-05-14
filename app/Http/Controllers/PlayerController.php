@@ -47,4 +47,9 @@ class PlayerController extends Controller
 
       //return $date->y;
     }
+
+    // Obtener jugadores con el ORM
+    public function getPlayersORM(){
+       
+    }
 }

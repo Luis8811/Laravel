@@ -1,5 +1,6 @@
 <?php
 use App\Player;
+use Illuminate\Database\Eloquent\Builder;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -48,6 +49,34 @@ Route::get('players', function(){
 	$players = Player::all();
 	return view('players.index')->with('players', $players);
 }); //ruta para obtener todos los jugadores
+
+Route::get('playersorm', function(){
+   $players = Player::all();
+   $playersWithAtLeast10RealBalance = $players->where('real_balance', '>',10);
+   $playersWithAtLeast10RealBalance->all();
+
+   return view('players.indexorm')->with('playersWithAtLeast10RealBalance', $playersWithAtLeast10RealBalance);
+}); // ruta para obtener todos los jugadores con el ORM
+
+
+// Ruta para la obtención de los usuarios de los jugadores
+Route::get('usersorm', function(){
+  $user = Player::find(1)->user;
+  return view('users.usersorm')->with('user',$user);
+}); //Obtiene los datos del usuario a partir del jugador
+
+// Ruta para mostrar todos los jugadores con info de usuario
+Route::get('playersusers', function(){
+  $playersC = Player::all();
+  $playersE = $playersC -> where('real_balance','>=',9);
+  $playersA = $playersE ->sortByDesc('real_balance'); //sortBy ordena de mayor a menor
+  $players = $playersA ->slice(0,10); // a partir del registro 1 obtener 10
+  return view('players.playersusers')->with('players', $players);
+});
+
+
+
+
 
 Route::get('playersInfo', 'PlayerController@getAllPlayersInfo');
 
