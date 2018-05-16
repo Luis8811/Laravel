@@ -11,6 +11,6 @@ class UserModel extends Model
 
      public function player()
     {
-        return $this->hasOne('App\Player', 'id');
+        return $this->hasOne('App\Player');
     } 
 }

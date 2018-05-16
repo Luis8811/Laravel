@@ -5,7 +5,7 @@
     <a href="{{ url('/') }}">Ir a página principal</a>
   @endif
 <h2>
-   @if (isset($breed)){{ $breed->name }}@endif Listado de jugadores
+   @if (isset($breed)){{ $breed->name }}@endif Listado de jugadores (v1) con saldo inferior a {{ $realBalance }}
 
   <a href="{{ url('cats/create') }}" class="btn btn-primary pull-right">
     Ordenar jugadores por saldo
@@ -14,13 +14,18 @@
 
 @stop
 @section('content')
+   <div>
   @foreach ($players as $player)
     <div class="player">
       <a href="#">
-        <strong>{{ $player->username }}</strong> - Nacimiemto:{{ $player->birthdate}} - Saldo real:{{ $player->real_balance }}  - Saldo con fichas: {{ $player->fake_balance }} - Email: 
-        {{ $player->user->email }} - Last login:
-        {{ $player->user->last_login }}
+        <strong>{{ $player->username }}</strong> - Nacimiemto:{{ $player->birthdate}} - Saldo real:{{ $player->real_balance }}  - Saldo con fichas: {{ $player->fake_balance }} - Email:
+        {{ $player->user->email }}       
       </a>
+
     </div>
   @endforeach
+ {{ $players->links()}}  <!-- Para el paginado -->
+
+ </div>
+
 @stop

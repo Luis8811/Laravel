@@ -1,6 +1,7 @@
 <?php
 use App\Player;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -30,6 +31,21 @@ Route::get('/usersWithRealBalancePlus',
 Route::get('/formUsersWithLessRealBalanceThan', function () {
     return view('users.users_with_less_real_balance_than');
 }); 
+
+
+// Obtener los jugadores con saldo real inferior a un valor dado
+Route::get('/formPlayersWtihLessRealBalanceThan', 
+function(){
+	return view('players.form_players_with_less_real_balance');
+});
+
+// Obtener los jugadores con saldo real inferior a un valor dado
+Route::get('/playersWithLessRealBalance', function(Request $request){
+	 $realBalance = $request->realBalance;
+	 $players = Player::where('real_balance', '<',$realBalance)->orderBy('real_balance', 'desc') ->paginate(15);
+        return view('players.playersusers', ['players' => $players, 'realBalance' => $realBalance]);
+});
+
 
 // Obtener los usuarios con saldo real inferior a un valor dado
 Route::get('/usersWithLessRealBalanceThan',

@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Player extends Model
 {
@@ -10,13 +11,21 @@ class Player extends Model
 
     protected $table ='players';
 
-     /*
-    public function user(){
-    	//return $this->hasOne('App\UserModel');
-    }
-
-    */
+    
     public function user(){
     	return $this->belongsTo('App\UserModel','users_id');
     	   }
+
+     /*
+    // Función para obtener los usuarios con menos saldo
+    public function usersWithLessRealBalance($realBalance){
+     
+     // $players = DB::table('players') -> where('real_balance', '<', $realBalance) -> get(); 
+
+     //$players = Player::where('real_balance', '<', '$realBalance')->get();
+      // Player::has('real_balance', '<', $realBalance)-> get(); 
+     // return $players;
+    }
+*/
+
 }
