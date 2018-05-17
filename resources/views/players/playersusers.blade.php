@@ -24,7 +24,7 @@
 
     </div>
   @endforeach
- {{ $players->links()}}  <!-- Para el paginado -->
+ {{ $players->appends($_GET)->links()}}  <!-- Para el paginado -->
 
  </div>
 
