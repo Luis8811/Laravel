@@ -1,9 +1,6 @@
 @extends('layouts.master')
 
 @section('header')
-  @if (isset($breed))
-    <a href="{{ url('/') }}">Ir a página principal</a>
-  @endif
 <h2>
   Jugadores con saldo real igual o superior a un valor
 </h2>

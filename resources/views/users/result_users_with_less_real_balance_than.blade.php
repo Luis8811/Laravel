@@ -14,7 +14,7 @@
     <div class="player">
       <a href="#">
         Username : <strong>{{ $user->username }}</strong>
-        Email: <strong>{{ $user->email }}</strong>
+        Email: <strong>{{ $user->user->email }}</strong>
         Saldo: <strong>{{ $user->real_balance }}</strong>
         Juego de registro: <strong>{{ $user->name }}</strong>
       </a>
