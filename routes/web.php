@@ -47,7 +47,25 @@ Route::get('/playersWithLessRealBalance', function(Request $request){
 });
 
 
-// Obtener los usuarios con saldo real inferior a un valor dado
+// Obtener los jugadores con saldo real igual o superior a un valor dado
+Route::get('/formPlayersWtihLessRealBalanceThan', 
+function(){
+	return view('players.form_players_with_less_real_balance');
+});
+
+// Página de formulario para obtener los jugadores  con saldo real igual o superior a un valor dado
+
+Route::get('/formPlayersWithMoreRealBalanceThan', function(){
+  return view('players.form_players_with_more_real_balance_than');
+});
+
+// Obtener los jugadores con saldo real igual o superior a un valor dado
+Route::get('/playersWithMoreRealBalance','PlayerController@getPlayersWithMoreRealBalanceThan');
+
+
+
+
+// Obtener los usuarios con saldo real igual o superior a un valor dado
 Route::get('/usersWithLessRealBalanceThan',
 	'UserController@getUsersWithLessRealBalanceThan');
 

@@ -52,4 +52,15 @@ class PlayerController extends Controller
     public function getPlayersORM(){
        
     }
+
+    // Obtener los jugadores con saldo real igual o superior a un valor dado
+    public function getPlayersWithMoreRealBalanceThan(Request $request){
+
+       $realBalance = $request->realBalance;
+       $players = Player::where('real_balance', '>=',$realBalance)->orderBy('real_balance', 'asc') ->paginate(10);
+        // $users = Player::has('realBalance', '<', $realBalance)-> get();
+       // $users = $usersCollection -> sortByDesc('real_balance');
+
+        return view('players.result_players_real_balance_more_than', ['players' => $players, 'realBalance' => $realBalance]);
+    }
 }
