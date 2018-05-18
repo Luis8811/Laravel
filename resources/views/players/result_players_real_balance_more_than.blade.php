@@ -2,7 +2,7 @@
 
 @section('header')
 <h2>
-   @if (isset($breed)){{ $breed->name }}@endif Listado de jugadores (v1) con saldo igual o superior a {{ $realBalance }}
+    Listado de jugadores (v1) con saldo igual o superior a {{ $realBalance }}
 </h2>
 
 @stop
@@ -13,7 +13,7 @@
       <a href="#">
         <strong>{{ $player->username }}</strong> - Nacimiemto:{{ $player->birthdate}} - Saldo real:{{ $player->real_balance }}  - Saldo con fichas: {{ $player->fake_balance }} - Email:
         {{ $player->user->email }} - Último login: 
-        {{ $player->user->last_login }}       
+        {{ $player->user->last_login }}  Juego de registro: {{ $player->gameOfRegistration->name }}      
       </a>
 
     </div>

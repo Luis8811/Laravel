@@ -12,7 +12,8 @@
     <div class="player">
       <a href="#">
         <strong>{{ $player->username }}</strong> - Nacimiemto:{{ $player->birthdate}} - Saldo real:{{ $player->real_balance }}  - Saldo con fichas: {{ $player->fake_balance }} - Email:
-        {{ $player->user->email }}  - Último login: {{ $player->user->last_login }}
+        {{ $player->user->email }}  - Último login: {{ $player->user->last_login }} - Juego de registro
+        {{ $player->gameOfRegistration->name}}
 
       </a>
 

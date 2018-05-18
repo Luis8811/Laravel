@@ -58,9 +58,6 @@ class PlayerController extends Controller
 
        $realBalance = $request->realBalance;
        $players = Player::where('real_balance', '>=',$realBalance)->orderBy('real_balance', 'asc') ->paginate(10);
-        // $users = Player::has('realBalance', '<', $realBalance)-> get();
-       // $users = $usersCollection -> sortByDesc('real_balance');
-
         return view('players.result_players_real_balance_more_than', ['players' => $players, 'realBalance' => $realBalance]);
     }
 }
